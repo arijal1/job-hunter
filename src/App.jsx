@@ -899,13 +899,9 @@ Output the full tailored resume text.`;
                 {[
                   { label: "1. Install Ollama", cmd: "curl -fsSL https://ollama.com/install.sh | sh" },
                   { label: "2. Pull model", cmd: "ollama pull llama3.2" },
-                  { label: "3. Enable external access", cmd: 'sudo systemctl edit ollama --force
-# Add under [Service]:
                   { label: "3. Enable external access", cmd: "sudo systemctl edit ollama --force\n# Add under [Service]:\nEnvironment=\"OLLAMA_HOST=0.0.0.0\"\nEnvironment=\"OLLAMA_ORIGINS=*\"" },
                   { label: "4. Restart Ollama", cmd: "sudo systemctl restart ollama" },
-                  { label: "5. Cloudflare Tunnel", cmd: "# Add to ~/.cloudflared/config.yml:
-- hostname: ollama.anuprijal.com.np
-  service: http://localhost:11434" },
+                  { label: "5. Cloudflare Tunnel", cmd: "# Add to ~/.cloudflared/config.yml:\n- hostname: ollama.anuprijal.com.np\n  service: http://localhost:11434" },
                 ].map(({ label, cmd }) => (
                   <div key={label} style={{ marginBottom: 12 }}>
                     <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, color: "#2a6a9a", marginBottom: 4 }}>{label}</div>
