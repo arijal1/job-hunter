@@ -197,7 +197,7 @@ function extractJSON(text) {
 
 // ─── Job search — calls Pi proxy (SEEK + Adzuna) ─────────────────────────────
 async function searchRealJobs(q, location, filters = {}) {
-  const proxyUrl = localStorage.getItem("proxy_url") || "http://localhost:3002";
+  const proxyUrl = localStorage.getItem("proxy_url") || "https://proxy.anuprijal.com.np";
   let url = proxyUrl.replace(/\/$/, "") + "/api/jobs"
     + "?q=" + encodeURIComponent(q)
     + "&location=" + encodeURIComponent(location);
@@ -217,7 +217,7 @@ async function searchRealJobs(q, location, filters = {}) {
 
 // ─── AI caller — calls Pi proxy → Ollama ─────────────────────────────────────
 async function callAI(system, userMsg) {
-  const proxyUrl = localStorage.getItem("proxy_url") || "http://localhost:3002";
+  const proxyUrl = localStorage.getItem("proxy_url") || "https://proxy.anuprijal.com.np";
   const model    = localStorage.getItem("ollama_model") || "llama3.2";
   const url      = proxyUrl.replace(/\/$/, "") + "/api/ollama";
 
@@ -503,7 +503,7 @@ export default function JobHunter() {
     setQuery(user.roles[0]);
     try { const r = localStorage.getItem(STORAGE_KEY(activeUserId)); if (r) setPipeline(JSON.parse(r)); } catch (_) {}
     try { const c = localStorage.getItem(CACHE_KEY(activeUserId)); if (c) { const p = JSON.parse(c); setJobs(p.jobs||[]); setLastQ(p.query||null); } } catch (_) {}
-    setOllamaUrl(localStorage.getItem("proxy_url") || "");
+    setOllamaUrl(localStorage.getItem("proxy_url") || "https://proxy.anuprijal.com.np");
     setOllamaModel(localStorage.getItem("ollama_model") || "llama3.2");
   }, [activeUserId]);
 
@@ -519,7 +519,7 @@ export default function JobHunter() {
   };
 
   const saveSettings = () => {
-    const url = ollamaUrl.trim() || "http://localhost:3002";
+    const url = ollamaUrl.trim() || "http://proxy.anuprijal.com.np";
     localStorage.setItem("proxy_url", url);
     localStorage.setItem("ollama_model", ollamaModel.trim() || "llama3.2");
     setOllamaUrl(url);
