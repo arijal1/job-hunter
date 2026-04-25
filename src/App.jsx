@@ -446,11 +446,9 @@ export default function JobHunter() {
     if (!clJob) return;
     setAiLoading(true); setAiError(null); setClResult(null);
     try {
-      const sys = `You are an expert career writer creating a cover letter for ${user.name}.
-Tone: ${clTone}. Write a compelling, personalised cover letter (3–4 paragraphs, ~280 words).
-Reference specific skills from the resume that match the job. Include the company name and role.
-Do NOT use generic phrases. Sound like a real person. End with a confident call to action.`;
-      const text = await callAI(sys, `Job: ${clJob.title} at ${clJob.company}\nDescription: ${clJob.description}\n\nResume:\n${user.resume}`);
+      const resumeSnap = user.resume.slice(0, 600);
+      const sys = `Write a ${clTone} cover letter for ${user.name}. Max 200 words, 3 paragraphs. Match skills to job. End with call to action.`;
+      const text = await callAI(sys, `ROLE: ${clJob.title} at ${clJob.company}. DESC: ${(clJob.description||"").slice(0,200)}. RESUME: ${resumeSnap}`);
       setClResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -461,10 +459,9 @@ Do NOT use generic phrases. Sound like a real person. End with a confident call 
     if (!rmJob) return;
     setAiLoading(true); setAiError(null); setRmScore(null); setRmAnalysis(null);
     try {
-      const sys = `You are a resume ATS and recruiter expert. Analyse the match between a resume and job description.
-Return ONLY JSON: {"score": number(0-100), "matched": ["skill1","skill2",...], "missing": ["gap1","gap2",...], "suggestions": ["tip1","tip2","tip3"], "summary": "2 sentence plain English summary"}
-No markdown, no explanation outside the JSON.`;
-      const text = await callAI(sys, `JOB: ${clJob?.title || rmJob.title} at ${rmJob.company}\nDESCRIPTION: ${rmJob.description}\n\nRESUME:\n${user.resume}`);
+      const skillsSnap = user.resume.slice(0, 500);
+      const sys = `Resume ATS analyser. Return ONLY valid JSON no markdown: {"score":0-100,"matched":["skill"],"missing":["gap"],"suggestions":["tip1","tip2","tip3"],"summary":"2 sentences"}`;
+      const text = await callAI(sys, `JOB: ${rmJob.title} at ${rmJob.company}. DESC: ${(rmJob.description||"").slice(0,200)}. SKILLS: ${skillsSnap}`);
       const clean = text.replace(/```json\s*/gi,"").replace(/```\s*/g,"").trim();
       const parsed = JSON.parse(clean.match(/\{[\s\S]*\}/)[0]);
       setRmScore(parsed.score); setRmAnalysis(parsed);
@@ -477,12 +474,9 @@ No markdown, no explanation outside the JSON.`;
     if (!ipJob) return;
     setAiLoading(true); setAiError(null); setIpResult(null);
     try {
-      const sys = `You are an expert interview coach for IT roles in Sydney, Australia.
-Generate 8 targeted interview questions for ${user.name} applying for this specific role.
-Mix: 3 technical questions, 3 behavioural (STAR format), 2 situational/scenario questions.
-For each question provide a suggested answer using actual experience from the resume. Be specific, not generic.
-Format as plain text: Q1: [question]\nA: [answer]\n\nQ2: ...`;
-      const text = await callAI(sys, `Role: ${ipJob.title} at ${ipJob.company}\nDescription: ${ipJob.description}\n\nResume:\n${user.resume}`);
+      const expSnap = user.resume.slice(0, 500);
+      const sys = `Interview coach. Generate 5 questions with answers. Mix: 2 technical, 2 behavioural STAR, 1 situational. Format: Q1: ...\nA: ...\n\nQ2: ...`;
+      const text = await callAI(sys, `ROLE: ${ipJob.title} at ${ipJob.company}. DESC: ${(ipJob.description||"").slice(0,200)}. EXPERIENCE: ${expSnap}`);
       setIpResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -493,16 +487,9 @@ Format as plain text: Q1: [question]\nA: [answer]\n\nQ2: ...`;
     if (!rtJob) return;
     setAiLoading(true); setAiError(null); setRtResult(null);
     try {
-      const sys = `You are an expert resume writer. Rewrite and tailor ${user.name}'s resume specifically for the target job.
-Rules:
-- Keep all factual information accurate — do NOT invent new roles, companies, or qualifications
-- Reorder bullet points so the most relevant skills appear first under each role
-- Rewrite the professional summary (3–4 sentences) to target this specific role
-- Inject keywords from the job description naturally into existing bullet points
-- Highlight matching certifications and tools prominently
-- Format as clean plain text with clear section headers
-Output the full tailored resume text.`;
-      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB DESCRIPTION: ${rtJob.description}\n\nCURRENT RESUME:\n${user.resume}`);
+      const resumeSnap2 = user.resume.slice(0, 700);
+      const sys = `Resume writer. Rewrite summary and top bullets to match the job. Keep facts accurate. Plain text output.`;
+      const text = await callAI(sys, `JOB: ${rtJob.title} at ${rtJob.company}. KEYWORDS: ${(rtJob.description||"").slice(0,200)}. RESUME: ${resumeSnap2}`);
       setRtResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
