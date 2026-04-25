@@ -196,11 +196,18 @@ function extractJSON(text) {
 }
 
 // ─── Job search — calls Pi proxy (SEEK + Adzuna) ─────────────────────────────
-async function searchRealJobs(q, location) {
+async function searchRealJobs(q, location, filters = {}) {
   const proxyUrl = localStorage.getItem("proxy_url") || "http://localhost:3002";
-  const url = proxyUrl.replace(/\/$/, "") + "/api/jobs"
+  let url = proxyUrl.replace(/\/$/, "") + "/api/jobs"
     + "?q=" + encodeURIComponent(q)
     + "&location=" + encodeURIComponent(location);
+  if (filters.salaryMin)    url += "&salary_min="     + filters.salaryMin;
+  if (filters.salaryMax)    url += "&salary_max="     + filters.salaryMax;
+  if (filters.contractType) url += "&contract_type="  + filters.contractType;
+  if (filters.contractTime) url += "&contract_time="  + filters.contractTime;
+  if (filters.daysOld)      url += "&days_old="       + filters.daysOld;
+  if (filters.distance)     url += "&distance="       + filters.distance;
+  if (filters.sortBy)       url += "&sort_by="        + filters.sortBy;
   const res = await fetch(url);
   if (!res.ok) throw new Error("Proxy error " + res.status + ". Is your Pi proxy running?");
   const data = await res.json();
@@ -454,7 +461,12 @@ export default function JobHunter() {
   const [searching, setSearching] = useState(false);
   const [searchErr, setSearchErr] = useState(null);
   const [lastQ, setLastQ]         = useState(null);
-  const [typeFilter, setTypeFilter] = useState('All');
+  const [typeFilter, setTypeFilter]   = useState('All');
+  const [showFilters, setShowFilters] = useState(false);
+  const [filters, setFilters]         = useState({
+    salaryMin: "", salaryMax: "", contractType: "", contractTime: "",
+    daysOld: "", distance: "50", sortBy: "date",
+  });
   const [selectedJob, setSelectedJob] = useState(null);
 
   // Settings
@@ -518,7 +530,7 @@ export default function JobHunter() {
   const searchJobs = async () => {
     setSearching(true); setSearchErr(null); setJobs([]);
     try {
-      const data = await searchRealJobs(query, location);
+      const data = await searchRealJobs(query, location, filters);
       const results = data.results || [];
       if (!results.length) throw new Error("No results found. Try a broader search or different location.");
       setJobs(results);
@@ -735,6 +747,114 @@ STRICT RULES:
                   }}>{r.replace(" Sydney","")}</button>
                 ))}
               </div>
+              {/* Filter Panel */}
+              <div style={{ marginBottom: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                  <button onClick={() => setShowFilters(!showFilters)} style={{
+                    fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11,
+                    letterSpacing: "0.08em", textTransform: "uppercase", padding: "5px 14px",
+                    borderRadius: 3, cursor: "pointer",
+                    background: showFilters ? "rgba(74,158,255,0.12)" : "transparent",
+                    color: showFilters ? "#4a9eff" : "#2a5a7a",
+                    border: showFilters ? "1px solid #4a9eff44" : "1px solid #1a3a5a",
+                  }}>⚙ Filters {showFilters ? "▲" : "▼"}</button>
+                  {Object.entries(filters).some(([k,v]) => v && !["50","date"].includes(v)) && (
+                    <span onClick={() => setFilters({ salaryMin:"", salaryMax:"", contractType:"", contractTime:"", daysOld:"", distance:"50", sortBy:"date" })}
+                      style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, color: "#f87171", cursor: "pointer" }}>
+                      ✕ Clear filters
+                    </span>
+                  )}
+                </div>
+              </div>
+              {showFilters && (
+                <div style={{ background: "#0a1520", border: "1px solid #1a3a5a", borderRadius: 6, padding: "14px 16px", marginBottom: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Min Salary</div>
+                      <select value={filters.salaryMin} onChange={e => setFilters(f => ({...f, salaryMin: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="">Any</option>
+                        <option value="50000">$50,000+</option>
+                        <option value="60000">$60,000+</option>
+                        <option value="70000">$70,000+</option>
+                        <option value="80000">$80,000+</option>
+                        <option value="90000">$90,000+</option>
+                        <option value="100000">$100,000+</option>
+                        <option value="120000">$120,000+</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Max Salary</div>
+                      <select value={filters.salaryMax} onChange={e => setFilters(f => ({...f, salaryMax: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="">Any</option>
+                        <option value="70000">Up to $70,000</option>
+                        <option value="80000">Up to $80,000</option>
+                        <option value="100000">Up to $100,000</option>
+                        <option value="120000">Up to $120,000</option>
+                        <option value="150000">Up to $150,000</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Posted Within</div>
+                      <select value={filters.daysOld} onChange={e => setFilters(f => ({...f, daysOld: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="">Any time</option>
+                        <option value="1">Today</option>
+                        <option value="3">Last 3 days</option>
+                        <option value="7">Last week</option>
+                        <option value="14">Last 2 weeks</option>
+                        <option value="30">Last month</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Contract Type</div>
+                      <select value={filters.contractType} onChange={e => setFilters(f => ({...f, contractType: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="">Any</option>
+                        <option value="permanent">Permanent</option>
+                        <option value="contract">Contract</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Work Hours</div>
+                      <select value={filters.contractTime} onChange={e => setFilters(f => ({...f, contractTime: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="">Any</option>
+                        <option value="full_time">Full Time</option>
+                        <option value="part_time">Part Time</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 5 }}>Distance</div>
+                      <select value={filters.distance} onChange={e => setFilters(f => ({...f, distance: e.target.value}))}
+                        style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 3, color: "#c8d8e8", fontFamily: "'Barlow', sans-serif", fontSize: 12, padding: "6px 8px" }}>
+                        <option value="10">Within 10km</option>
+                        <option value="25">Within 25km</option>
+                        <option value="50">Within 50km</option>
+                        <option value="100">Within 100km</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", gap: 8, marginTop: 12, alignItems: "center" }}>
+                    <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase" }}>Sort by:</span>
+                    {[["date","Recent"],["relevance","Relevant"],["salary","Salary"]].map(([val, label]) => (
+                      <button key={val} onClick={() => setFilters(f => ({...f, sortBy: val}))} style={{
+                        fontFamily: "'Barlow', sans-serif", fontSize: 11, padding: "3px 10px", borderRadius: 20, cursor: "pointer",
+                        background: filters.sortBy === val ? "rgba(74,158,255,0.15)" : "transparent",
+                        color: filters.sortBy === val ? "#7ec8ff" : "#2a5a7a",
+                        border: filters.sortBy === val ? "1px solid #4a9eff44" : "1px solid #1a3a5a",
+                      }}>{label}</button>
+                    ))}
+                    <button onClick={() => { setShowFilters(false); searchJobs(); }} style={{
+                      marginLeft: "auto", fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700,
+                      fontSize: 12, letterSpacing: "0.07em", textTransform: "uppercase",
+                      padding: "6px 16px", borderRadius: 3, cursor: "pointer",
+                      background: "linear-gradient(135deg,#1a6abf,#0d3a8a)", color: "#7ec8ff", border: "1px solid #2a6abf44",
+                    }}>Apply & Search</button>
+                  </div>
+                </div>
+              )}
               <div style={{ background: "#0a1520", border: "1px solid #0e2a3a", borderRadius: 5, padding: "9px 14px", marginBottom: 16, display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
                 <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#1a6a9a", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Profile</span>
                 <span style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "#3a7ab8" }}>{user.current}</span>
