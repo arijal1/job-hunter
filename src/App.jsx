@@ -901,8 +901,7 @@ Output the full tailored resume text.`;
                   { label: "2. Pull model", cmd: "ollama pull llama3.2" },
                   { label: "3. Enable external access", cmd: 'sudo systemctl edit ollama --force
 # Add under [Service]:
-Environment="OLLAMA_HOST=0.0.0.0"
-Environment="OLLAMA_ORIGINS=*"' },
+                  { label: "3. Enable external access", cmd: "sudo systemctl edit ollama --force\n# Add under [Service]:\nEnvironment=\"OLLAMA_HOST=0.0.0.0\"\nEnvironment=\"OLLAMA_ORIGINS=*\"" },
                   { label: "4. Restart Ollama", cmd: "sudo systemctl restart ollama" },
                   { label: "5. Cloudflare Tunnel", cmd: "# Add to ~/.cloudflared/config.yml:
 - hostname: ollama.anuprijal.com.np
