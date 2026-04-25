@@ -454,6 +454,7 @@ export default function JobHunter() {
   const [searching, setSearching] = useState(false);
   const [searchErr, setSearchErr] = useState(null);
   const [lastQ, setLastQ]         = useState(null);
+  const [typeFilter, setTypeFilter] = useState('All');
   const [selectedJob, setSelectedJob] = useState(null);
 
   // Settings
@@ -547,7 +548,7 @@ export default function JobHunter() {
     setAiLoading(true); setAiError(null); setClResult(null);
     try {
       const resumeSnap = user.resume.slice(0, 600);
-      const sys = `Write a ${clTone} cover letter for ${user.name}. Max 200 words, 3 paragraphs. Match skills to job. End with call to action.`;
+      const sys = `Write a ${clTone} cover letter for ${user.name}. 3 paragraphs, max 220 words. Plain text only — no asterisks, no markdown, no symbols. Match skills to the job. Sound human and specific. End with a confident call to action.`;
       const text = await callAI(sys, `ROLE: ${clJob.title} at ${clJob.company}. DESC: ${(clJob.description||"").slice(0,200)}. RESUME: ${resumeSnap}`);
       setClResult(text);
     } catch (e) { setAiError(e.message); }
@@ -587,14 +588,18 @@ export default function JobHunter() {
     if (!rtJob) return;
     setAiLoading(true); setAiError(null); setRtResult(null);
     try {
-      const sys = `You are a professional resume writer. Produce a COMPLETE, ready-to-use resume for the candidate below, tailored for the target job.
-RULES: Output the FULL resume — all sections, all roles, all bullet points. Do NOT summarise or truncate.
-Rewrite the summary/objective section to target the specific role.
-Reorder and reword bullet points to highlight most relevant experience first.
-Naturally inject keywords from the job description into existing bullet points.
-Keep ALL facts, dates, companies, and qualifications exactly as provided — do not invent anything.
-Format with clear section headers. Use bullet points. Ready to copy-paste.`;
-      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB KEYWORDS: ${(rtJob.description||"").slice(0,300)}\n\nFULL RESUME TO TAILOR:\n${user.resume}`);
+      const sys = `You are a professional resume writer. Output a COMPLETE tailored resume in PLAIN TEXT ONLY.
+STRICT RULES:
+- Plain text only. Zero asterisks, zero bold markers (**), zero markdown, zero bullet symbols like * or •.
+- Use a hyphen (-) for ALL bullet points, exactly like the original resume.
+- Output the FULL resume with ALL sections: Name/Contact, Objective/Summary, Technical Skills, ALL experience roles with ALL bullet points, Education, Certifications.
+- Keep ALL facts 100% accurate. Never invent experience, companies, or qualifications.
+- Rewrite the summary/objective to target this specific role.
+- Reorder bullet points within each role so most relevant ones appear first.
+- Inject keywords from the job description naturally into existing bullet points.
+- Use UPPERCASE for section headers exactly as in the original.
+- Output ONLY the resume. No intro sentence, no commentary, no explanation.`;
+      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB DESCRIPTION KEYWORDS: ${(rtJob.description||"").slice(0,300)}\n\nORIGINAL RESUME:\n${user.resume}`);
       setRtResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -742,11 +747,45 @@ Format with clear section headers. Use bullet points. Ready to copy-paste.`;
               {searching && <Spinner text="searching sydney job boards…" />}
               {!searching && jobs.length > 0 && (
                 <>
-                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
                     <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#2a5a7a" }}>{jobs.length} results · "{lastQ}"</span>
                     <span style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, color: "#1a4a6a" }}>{pipeline.length} in pipeline</span>
                   </div>
-                  {jobs.map(j => <JobCard key={j.id} job={j} onSave={handleSave} onApply={handleApply} isSaved={!!pipeline.find(p => p.id === j.id)} />)}
+                  {/* Direct search links */}
+                  <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap", alignItems: "center" }}>
+                    <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#1a4a6a", letterSpacing: "0.1em", textTransform: "uppercase" }}>Also search on:</span>
+                    {[
+                      { label: "SEEK", color: "#1a6abf", url: `https://www.seek.com.au/jobs?keywords=${encodeURIComponent(query)}&where=${encodeURIComponent(location.split(",")[0])}` },
+                      { label: "Indeed", color: "#2557a7", url: `https://au.indeed.com/jobs?q=${encodeURIComponent(query)}&l=${encodeURIComponent(location.split(",")[0])}` },
+                      { label: "LinkedIn", color: "#0a66c2", url: `https://www.linkedin.com/jobs/search/?keywords=${encodeURIComponent(query)}&location=${encodeURIComponent(location.split(",")[0])}%2C%20Australia` },
+                      { label: "Jora", color: "#e85d04", url: `https://au.jora.com/jobs?q=${encodeURIComponent(query)}&l=${encodeURIComponent(location.split(",")[0])}` },
+                    ].map(s => (
+                      <a key={s.label} href={s.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
+                        <span style={{
+                          fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 11,
+                          letterSpacing: "0.06em", padding: "3px 10px", borderRadius: 3, cursor: "pointer",
+                          background: s.color + "18", color: s.color, border: `1px solid ${s.color}44`,
+                          transition: "all 0.15s",
+                        }}>{s.label} ↗</span>
+                      </a>
+                    ))}
+                  </div>
+                  {/* Filter bar */}
+                  <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
+                    {["All", "Full-time", "Contract", "Part-time"].map(f => (
+                      <button key={f} onClick={() => setTypeFilter(f)} style={{
+                        fontFamily: "'Barlow', sans-serif", fontSize: 11, fontWeight: 500,
+                        padding: "3px 12px", borderRadius: 20, cursor: "pointer",
+                        background: typeFilter === f ? "rgba(74,158,255,0.15)" : "transparent",
+                        color: typeFilter === f ? "#7ec8ff" : "#2a5a7a",
+                        border: typeFilter === f ? "1px solid #4a9eff44" : "1px solid #1a3a5a",
+                      }}>{f}</button>
+                    ))}
+                    <div style={{ marginLeft: "auto", fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#1a4a6a", alignSelf: "center" }}>
+                      {jobs.filter(j => typeFilter === "All" || j.type === typeFilter).length} shown
+                    </div>
+                  </div>
+                  {jobs.filter(j => typeFilter === 'All' || j.type === typeFilter).map(j => <JobCard key={j.id} job={j} onSave={handleSave} onApply={handleApply} isSaved={!!pipeline.find(p => p.id === j.id)} />)}
                 </>
               )}
               {!searching && jobs.length === 0 && !searchErr && (
