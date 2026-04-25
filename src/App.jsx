@@ -1,54 +1,89 @@
 import { useState, useEffect, useRef } from "react";
 
-// ─── Anup's Profile ───────────────────────────────────────────────────────────
-const CANDIDATE = {
-  name: "Anup Rijal",
-  location: "Burwood, NSW 2134",
-  phone: "0416 203 633",
-  email: "rejalanop55@gmail.com",
-  linkedin: "https://www.linkedin.com/in/anup-rijal-bb579a131",
-  portfolio: "https://anuprijal.com",
-  current: "Service Desk Analyst L2 — Opal Healthcare (Dec 2025–Present)",
-  salary: "AUD 80,000–100,000",
-  sectors: "healthcare, enterprise IT, managed services",
-};
-
-const RESUME_TEXT = `Anup Rijal | Burwood NSW 2134 | 0416 203 633 | rejalanop55@gmail.com
+// ─── User Profiles ────────────────────────────────────────────────────────────
+const USERS = {
+  anup: {
+    id: "anup",
+    name: "Anup Rijal",
+    avatar: "AR",
+    color: "#4a9eff",
+    location: "Burwood, NSW 2134",
+    phone: "0416 203 633",
+    email: "rejalanop55@gmail.com",
+    linkedin: "https://www.linkedin.com/in/anup-rijal-bb579a131",
+    current: "Service Desk Analyst L2 — Opal Healthcare",
+    salary: "AUD 80,000–100,000",
+    sectors: "healthcare, enterprise IT, managed services",
+    roles: [
+      "Service Desk Analyst Level 2 Sydney",
+      "ICT Technical Support Specialist Sydney",
+      "Endpoint Engineer Intune SCCM Sydney",
+      "Junior Systems Administrator M365 Sydney",
+      "IT Operations Analyst Healthcare Sydney",
+    ],
+    resume: `Anup Rijal | Burwood NSW 2134 | 0416 203 633 | rejalanop55@gmail.com
 
 SUMMARY: IT Service Desk Analyst Level 2 with experience supporting enterprise environments across healthcare, telecommunications, and technology sectors. Skilled in advanced troubleshooting, Microsoft 365 administration, Active Directory, Intune device management, SCCM deployments, and endpoint support across Windows, macOS, and mobile platforms.
 
 TECHNICAL SKILLS: Windows 10/11, Windows Server 2016/2019, macOS, iOS, Microsoft 365, Exchange Admin Center, Azure AD, Teams, SharePoint, Microsoft Intune, SCCM, PDQ Deploy, Active Directory, Group Policy, User Provisioning, VMware, Hyper-V, Citrix, TCP/IP, DNS, DHCP, VLANs, VPN, RDC, TeamViewer, AnyDesk, Quick Assist, ServiceNow, Zendesk, FreshService.
 
 EXPERIENCE:
-- Service Desk Analyst L2 | Opal Healthcare | Dec 2025–Present: Level 2 support and escalation management for enterprise healthcare users. Active Directory, Group Policy, Microsoft 365 (Exchange, Teams, SharePoint). Intune and SCCM device management and policy deployment. DNS, DHCP, VPN troubleshooting. Device deployment, imaging, lifecycle management. IP/DECT phone management. Incident management and root cause analysis.
-- Service Desk Analyst L1 | Opal Healthcare | Dec 2024–Dec 2025: Frontline IT support, incident logging via ITSM, Windows/macOS/mobile troubleshooting, imaging, account provisioning, printers, VPN, M365.
-- Technical Specialist | Apple | May 2024–Dec 2024: Advanced Apple device troubleshooting, escalation management, high customer satisfaction.
-- IT Support Officer (Intern) | Rebb Tech Pty Ltd | Dec 2021–May 2022: Remote and onsite support, hardware/software configuration, SCCM deployments, inventory management.
+- Service Desk Analyst L2 | Opal Healthcare | Dec 2025–Present: Level 2 support and escalation management for enterprise healthcare users. Active Directory, Group Policy, Microsoft 365 (Exchange, Teams, SharePoint). Intune and SCCM device management. DNS, DHCP, VPN troubleshooting. Device deployment, imaging, lifecycle management.
+- Service Desk Analyst L1 | Opal Healthcare | Dec 2024–Dec 2025: Frontline IT support, incident logging, Windows/macOS/mobile troubleshooting, imaging, account provisioning, printers, VPN, M365.
+- Technical Specialist | Apple | May 2024–Dec 2024: Advanced Apple device troubleshooting, escalation management.
+- IT Support Officer (Intern) | Rebb Tech Pty Ltd | Dec 2021–May 2022: Remote and onsite support, SCCM deployments, inventory management.
 
-EDUCATION: Bachelor of Information Technology & Systems — Victorian Institute of Technology Sydney (2018–2020). Certificate IV in IT — TAFE NSW (2017–2018). Certificate III in IT — TAFE NSW (2017–2018).
+EDUCATION: Bachelor of Information Technology & Systems — Victorian Institute of Technology Sydney (2018–2020).
+CERTIFICATIONS: Systems Analyst — ACS. Network & Systems Engineer — ACS.`,
+  },
 
-CERTIFICATIONS: Systems Analyst — Australian Computer Society. Network & Systems Engineer — Australian Computer Society.`;
+  apil: {
+    id: "apil",
+    name: "Apil Rijal",
+    avatar: "AP",
+    color: "#34d399",
+    location: "Burwood, NSW",
+    phone: "+61 411 237 563",
+    email: "rijalapil43@gmail.com",
+    linkedin: "https://linkedin.com/in/aaronrijal",
+    current: "Data Research Analyst — Dealer Studio (Remote)",
+    salary: "AUD 85,000–115,000",
+    sectors: "data analytics, government, health, automotive, finance",
+    roles: [
+      "Data Analyst Sydney",
+      "Senior Data Analyst NSW Government Sydney",
+      "Business Intelligence Analyst Power BI Sydney",
+      "Analytics Engineer SQL Python Sydney",
+      "Data Scientist Healthcare Sydney",
+    ],
+    resume: `Apil Rijal | Burwood NSW | +61 411 237 563 | rijalapil43@gmail.com
 
-const JOB_ROLES = [
-  "Service Desk Analyst Level 2 Sydney",
-  "ICT Technical Support Specialist Sydney",
-  "Endpoint Engineer Intune SCCM Sydney",
-  "Junior Systems Administrator M365 Sydney",
-  "IT Operations Analyst Healthcare Sydney",
-];
+SUMMARY: Data Analyst with experience in data research, predictive analytics, and data-driven process improvement across NSW Government and private sector. Skilled in analysing large datasets, developing dashboards, automating workflows, and translating complex data into actionable insights.
+
+TECHNICAL SKILLS: Python, SQL, Power BI, Tableau, Excel (Pivot Tables, LOOKUP, Charts), MySQL, PostgreSQL, MSSQL, MongoDB, BigQuery, Snowflake, AWS, Azure, GCP, ETL pipelines, predictive modelling, machine learning, API integration.
+
+EXPERIENCE:
+- Data Research Analyst | Dealer Studio (Remote) | Oct 2024–Feb 2026: Conducted data research for automotive sales performance and inventory optimisation. Built predictive models for vehicle demand and pricing using Python and ML. Designed executive dashboards monitoring KPIs and revenue. Optimised ETL pipelines.
+- Data Analyst | NSW Health, Chatswood | Jul 2022–Oct 2024: Analysed large health datasets for trends and correlations. Developed predictive models for disease forecasting and resource allocation. Built dashboards for internal stakeholders and leadership. Collaborated with cross-functional teams on vaccination coverage and health outcomes.
+- Aviation Safety Analyst | Certis Security, Sydney | Jan 2021–Jul 2022: Analysed aviation safety data and incident reports. Maintained safety dashboards. Built predictive models for risk anticipation and resource allocation.
+
+EDUCATION: Bachelor of Computing Information Systems — Victoria University Melbourne (2019). Advanced Diploma in Data Analysis — Asia Pacific International College Sydney (2016).
+CERTIFICATIONS: Google Advanced Data Analytics Specialization. Microsoft Power BI Data Analyst Associate.`,
+  },
+};
 
 const LOCATIONS = [
-  { label: "Sydney CBD",        value: "Sydney CBD, NSW" },
-  { label: "North Sydney",      value: "North Sydney, NSW" },
-  { label: "Parramatta",        value: "Parramatta, NSW" },
-  { label: "Macquarie Park",    value: "Macquarie Park, NSW" },
-  { label: "Chatswood",         value: "Chatswood, NSW" },
+  { label: "Sydney CBD",            value: "Sydney CBD, NSW" },
+  { label: "North Sydney",          value: "North Sydney, NSW" },
+  { label: "Parramatta",            value: "Parramatta, NSW" },
+  { label: "Macquarie Park",        value: "Macquarie Park, NSW" },
+  { label: "Chatswood",             value: "Chatswood, NSW" },
   { label: "Burwood / Strathfield", value: "Burwood, NSW" },
-  { label: "Norwest / Hills",   value: "Norwest Business Park, NSW" },
-  { label: "Olympic Park",      value: "Sydney Olympic Park, NSW" },
-  { label: "Mascot / Airport",  value: "Mascot, NSW" },
-  { label: "Remote / WFH",      value: "Remote, Australia" },
-  { label: "Anywhere in NSW",   value: "New South Wales, Australia" },
+  { label: "Norwest / Hills",       value: "Norwest Business Park, NSW" },
+  { label: "Olympic Park",          value: "Sydney Olympic Park, NSW" },
+  { label: "Mascot / Airport",      value: "Mascot, NSW" },
+  { label: "Remote / WFH",          value: "Remote, Australia" },
+  { label: "Anywhere in NSW",       value: "New South Wales, Australia" },
 ];
 
 const STATUS_COLS = [
@@ -59,8 +94,8 @@ const STATUS_COLS = [
   { id: "rejected",  label: "Rejected",  color: "#f87171", bg: "rgba(248,113,113,0.07)" },
 ];
 
-const STORAGE_KEY  = "jh-pipeline-v2";
-const CACHE_KEY    = "jh-search-cache-v2";
+const STORAGE_KEY = (uid) => `jh-pipeline-${uid}`;
+const CACHE_KEY   = (uid) => `jh-cache-${uid}`;
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function extractJSON(text) {
@@ -75,11 +110,24 @@ function extractJSON(text) {
   return null;
 }
 
-// ─── AI caller — uses Ollama on your Pi ──────────────────────────────────────
+// ─── Job search — calls Pi proxy (SEEK + Adzuna) ─────────────────────────────
+async function searchRealJobs(q, location) {
+  const proxyUrl = localStorage.getItem("proxy_url") || "http://localhost:3002";
+  const url = proxyUrl.replace(/\/$/, "") + "/api/jobs"
+    + "?q=" + encodeURIComponent(q)
+    + "&location=" + encodeURIComponent(location);
+  const res = await fetch(url);
+  if (!res.ok) throw new Error("Proxy error " + res.status + ". Is your Pi proxy running?");
+  const data = await res.json();
+  if (data.error) throw new Error(data.error);
+  return data;
+}
+
+// ─── AI caller — calls Pi proxy → Ollama ─────────────────────────────────────
 async function callAI(system, userMsg) {
-  const ollamaUrl = localStorage.getItem("ollama_url") || "http://localhost:11434";
-  const model     = localStorage.getItem("ollama_model") || "llama3.2";
-  const url = ollamaUrl.replace(/\/$/, "") + "/api/chat";
+  const proxyUrl = localStorage.getItem("proxy_url") || "http://localhost:3002";
+  const model    = localStorage.getItem("ollama_model") || "llama3.2";
+  const url      = proxyUrl.replace(/\/$/, "") + "/api/ollama";
 
   const res = await fetch(url, {
     method: "POST",
@@ -96,7 +144,7 @@ async function callAI(system, userMsg) {
 
   if (!res.ok) {
     const txt = await res.text().catch(() => "");
-    throw new Error(`Ollama error ${res.status}${txt ? ": " + txt.slice(0,120) : ""}. Check your Pi URL in Settings.`);
+    throw new Error("AI error " + res.status + (txt ? ": " + txt.slice(0,120) : "") + ". Check Pi proxy URL in Settings.");
   }
   const data = await res.json();
   return data?.message?.content || data?.response || "";
@@ -295,10 +343,13 @@ function ScoreRing({ score }) {
 
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function JobHunter() {
+  const [activeUserId, setActiveUserId] = useState(() => localStorage.getItem("jh-active-user") || "anup");
+  const user = USERS[activeUserId] || USERS.anup;
+
   const [tab, setTab]             = useState("search");
   const [jobs, setJobs]           = useState([]);
   const [pipeline, setPipeline]   = useState([]);
-  const [query, setQuery]         = useState(JOB_ROLES[0]);
+  const [query, setQuery]         = useState(user.roles[0]);
   const [location, setLocation]   = useState(LOCATIONS[0].value);
   const [searching, setSearching] = useState(false);
   const [searchErr, setSearchErr] = useState(null);
@@ -332,93 +383,49 @@ export default function JobHunter() {
   const [rtJob, setRtJob]         = useState(null);
   const [rtResult, setRtResult]   = useState(null);
 
-  // Load storage + Ollama config
+  // Load storage + Ollama config — reload when user switches
   useEffect(() => {
-    try { const r = localStorage.getItem(STORAGE_KEY); if (r) setPipeline(JSON.parse(r)); } catch (_) {}
-    try { const c = localStorage.getItem(CACHE_KEY); if (c) { const p = JSON.parse(c); setJobs(p.jobs||[]); setLastQ(p.query||null); } } catch (_) {}
-    setOllamaUrl(localStorage.getItem("ollama_url") || "");
+    setJobs([]); setLastQ(null); setPipeline([]);
+    setClResult(null); setRmScore(null); setRmAnalysis(null); setIpResult(null); setRtResult(null);
+    setQuery(user.roles[0]);
+    try { const r = localStorage.getItem(STORAGE_KEY(activeUserId)); if (r) setPipeline(JSON.parse(r)); } catch (_) {}
+    try { const c = localStorage.getItem(CACHE_KEY(activeUserId)); if (c) { const p = JSON.parse(c); setJobs(p.jobs||[]); setLastQ(p.query||null); } } catch (_) {}
+    setOllamaUrl(localStorage.getItem("proxy_url") || "");
     setOllamaModel(localStorage.getItem("ollama_model") || "llama3.2");
-  }, []);
+  }, [activeUserId]);
 
   const savePipeline = (next) => {
     setPipeline(next);
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch (_) {}
+    try { localStorage.setItem(STORAGE_KEY(activeUserId), JSON.stringify(next)); } catch (_) {}
+  };
+
+  const switchUser = (uid) => {
+    localStorage.setItem("jh-active-user", uid);
+    setActiveUserId(uid);
+    setTab("search");
   };
 
   const saveSettings = () => {
-    const url = ollamaUrl.trim() || "http://localhost:11434";
-    localStorage.setItem("ollama_url", url);
+    const url = ollamaUrl.trim() || "http://localhost:3002";
+    localStorage.setItem("proxy_url", url);
     localStorage.setItem("ollama_model", ollamaModel.trim() || "llama3.2");
     setOllamaUrl(url);
     setShowSettings(false);
   };
 
-  // ── Search ──
+  // ── Search — real jobs from SEEK + Adzuna ──
   const searchJobs = async () => {
     setSearching(true); setSearchErr(null); setJobs([]);
     try {
-      const locLabel = LOCATIONS.find(l => l.value === location)?.label || location;
-
-      // Strict JSON-only prompt — no system prompt ambiguity
-      const userMsg = `Generate a JSON array of 8 realistic IT job listings for "${query}" near ${locLabel}, Australia.
-RULES: respond with ONLY the JSON array. Start with [ and end with ]. No text before or after.
-Each object must have exactly these keys:
-"id": "job_1" through "job_8"
-"title": job title string
-"company": company name string
-"location": "${locLabel}" or nearby suburb
-"salary": salary range string like "AUD 80,000-95,000" or null
-"description": exactly 2 sentences describing the role, mentioning tools like Intune/M365/AD where relevant
-"url": "https://www.seek.com.au/job/" followed by a 8-digit number
-"postedDate": one of "Today", "1d ago", "2d ago", "3d ago", "1w ago"
-"source": one of "SEEK", "LinkedIn", "Indeed"
-"type": one of "Full-time", "Contract", "Part-time"
-
-Example of ONE item (yours must have 8):
-[{"id":"job_1","title":"Service Desk Analyst L2","company":"Acme Health","location":"${locLabel}","salary":"AUD 82,000-90,000","description":"Provide Level 2 support for 500+ users across Microsoft 365 and Active Directory. Manage Intune device policies and resolve escalated endpoint issues.","url":"https://www.seek.com.au/job/12345678","postedDate":"1d ago","source":"SEEK","type":"Full-time"}]
-
-Now generate all 8. JSON array only:`;
-
-      const text = await callAI(
-        "You are a JSON generator. You ONLY output raw JSON arrays. Never add explanations, markdown, or commentary. Your entire response must start with [ and end with ].",
-        userMsg,
-        1400
-      );
-
-      let parsed = extractJSON(text);
-
-      // Deep fallback: try to grab anything that looks like job objects
-      if (!parsed) {
-        const chunks = text.match(/\{[^{}]+\}/g);
-        if (chunks?.length) {
-          try {
-            parsed = chunks.slice(0, 8).map(c => JSON.parse(c));
-          } catch (_) {}
-        }
-      }
-
-      // Last resort: generate minimal hardcoded stubs so UI never breaks
-      if (!parsed?.length) {
-        const sources = ["SEEK","LinkedIn","Indeed"];
-        const types = ["Full-time","Contract"];
-        parsed = Array.from({length: 6}, (_, i) => ({
-          id: `job_fallback_${i}`,
-          title: query.replace(/ Sydney| NSW/gi,"").trim(),
-          company: ["Healthscope","Optus","DXC Technology","Datacom","NTT","Fujitsu"][i],
-          location: locLabel,
-          salary: "AUD 80,000–95,000",
-          description: `Seeking an experienced ${query.replace(/ Sydney| NSW/gi,"").trim()} to join our team in ${locLabel}. Strong Microsoft 365, Active Directory, and endpoint management skills required.`,
-          url: `https://www.seek.com.au/job/${70000000+i}`,
-          postedDate: ["Today","1d ago","2d ago","3d ago","1w ago","1w ago"][i],
-          source: sources[i % 3],
-          type: types[i % 2],
-        }));
-      }
-
-      const ids = parsed.map((j, i) => ({ ...j, id: j.id || `job_${Date.now()}_${i}` }));
-      setJobs(ids); setLastQ(`${query} · ${locLabel}`);
-      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ jobs: ids, query })); } catch (_) {}
-    } catch (e) { setSearchErr(e.message); }
+      const data = await searchRealJobs(query, location);
+      const results = data.results || [];
+      if (!results.length) throw new Error("No results found. Try a broader search or different location.");
+      setJobs(results);
+      setLastQ(query + " · " + (LOCATIONS.find(l => l.value === location)?.label || location));
+      try { localStorage.setItem(CACHE_KEY(activeUserId), JSON.stringify({ jobs: results, query })); } catch (_) {}
+    } catch (e) {
+      setSearchErr(e.message);
+    }
     setSearching(false);
   };
 
@@ -439,11 +446,11 @@ Now generate all 8. JSON array only:`;
     if (!clJob) return;
     setAiLoading(true); setAiError(null); setClResult(null);
     try {
-      const sys = `You are an expert career writer creating a cover letter for ${CANDIDATE.name}.
+      const sys = `You are an expert career writer creating a cover letter for ${user.name}.
 Tone: ${clTone}. Write a compelling, personalised cover letter (3–4 paragraphs, ~280 words).
 Reference specific skills from the resume that match the job. Include the company name and role.
 Do NOT use generic phrases. Sound like a real person. End with a confident call to action.`;
-      const text = await callAI(sys, `Job: ${clJob.title} at ${clJob.company}\nDescription: ${clJob.description}\n\nResume:\n${RESUME_TEXT}`);
+      const text = await callAI(sys, `Job: ${clJob.title} at ${clJob.company}\nDescription: ${clJob.description}\n\nResume:\n${user.resume}`);
       setClResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -457,7 +464,7 @@ Do NOT use generic phrases. Sound like a real person. End with a confident call 
       const sys = `You are a resume ATS and recruiter expert. Analyse the match between a resume and job description.
 Return ONLY JSON: {"score": number(0-100), "matched": ["skill1","skill2",...], "missing": ["gap1","gap2",...], "suggestions": ["tip1","tip2","tip3"], "summary": "2 sentence plain English summary"}
 No markdown, no explanation outside the JSON.`;
-      const text = await callAI(sys, `JOB: ${clJob?.title || rmJob.title} at ${rmJob.company}\nDESCRIPTION: ${rmJob.description}\n\nRESUME:\n${RESUME_TEXT}`);
+      const text = await callAI(sys, `JOB: ${clJob?.title || rmJob.title} at ${rmJob.company}\nDESCRIPTION: ${rmJob.description}\n\nRESUME:\n${user.resume}`);
       const clean = text.replace(/```json\s*/gi,"").replace(/```\s*/g,"").trim();
       const parsed = JSON.parse(clean.match(/\{[\s\S]*\}/)[0]);
       setRmScore(parsed.score); setRmAnalysis(parsed);
@@ -471,11 +478,11 @@ No markdown, no explanation outside the JSON.`;
     setAiLoading(true); setAiError(null); setIpResult(null);
     try {
       const sys = `You are an expert interview coach for IT roles in Sydney, Australia.
-Generate 8 targeted interview questions for ${CANDIDATE.name} applying for this specific role.
+Generate 8 targeted interview questions for ${user.name} applying for this specific role.
 Mix: 3 technical questions, 3 behavioural (STAR format), 2 situational/scenario questions.
 For each question provide a suggested answer using actual experience from the resume. Be specific, not generic.
 Format as plain text: Q1: [question]\nA: [answer]\n\nQ2: ...`;
-      const text = await callAI(sys, `Role: ${ipJob.title} at ${ipJob.company}\nDescription: ${ipJob.description}\n\nResume:\n${RESUME_TEXT}`);
+      const text = await callAI(sys, `Role: ${ipJob.title} at ${ipJob.company}\nDescription: ${ipJob.description}\n\nResume:\n${user.resume}`);
       setIpResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -486,7 +493,7 @@ Format as plain text: Q1: [question]\nA: [answer]\n\nQ2: ...`;
     if (!rtJob) return;
     setAiLoading(true); setAiError(null); setRtResult(null);
     try {
-      const sys = `You are an expert resume writer. Rewrite and tailor ${CANDIDATE.name}'s resume specifically for the target job.
+      const sys = `You are an expert resume writer. Rewrite and tailor ${user.name}'s resume specifically for the target job.
 Rules:
 - Keep all factual information accurate — do NOT invent new roles, companies, or qualifications
 - Reorder bullet points so the most relevant skills appear first under each role
@@ -495,7 +502,7 @@ Rules:
 - Highlight matching certifications and tools prominently
 - Format as clean plain text with clear section headers
 Output the full tailored resume text.`;
-      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB DESCRIPTION: ${rtJob.description}\n\nCURRENT RESUME:\n${RESUME_TEXT}`);
+      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB DESCRIPTION: ${rtJob.description}\n\nCURRENT RESUME:\n${user.resume}`);
       setRtResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -552,9 +559,23 @@ Output the full tailored resume text.`;
         {/* Header */}
         <div style={{ background: "#07111a", borderBottom: "1px solid #0e2035", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#4a9eff", boxShadow: "0 0 10px #4a9eff88" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: user.color, boxShadow: `0 0 10px ${user.color}88` }} />
             <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 18, color: "#e8f4ff", letterSpacing: "0.1em", textTransform: "uppercase" }}>Job Hunter</span>
-            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#1a5a8a", letterSpacing: "0.12em" }}>// {CANDIDATE.name} · {LOCATIONS.find(l=>l.value===location)?.label || "SYD"}</span>
+            <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#1a5a8a", letterSpacing: "0.12em" }}>// {LOCATIONS.find(l=>l.value===location)?.label || "SYD"}</span>
+          </div>
+          {/* User Switcher */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {Object.values(USERS).map(u => (
+              <button key={u.id} onClick={() => switchUser(u.id)} style={{
+                display: "flex", alignItems: "center", gap: 7, padding: "6px 12px",
+                borderRadius: 20, cursor: "pointer", transition: "all 0.15s",
+                background: activeUserId === u.id ? `${u.color}18` : "transparent",
+                border: activeUserId === u.id ? `1px solid ${u.color}44` : "1px solid #1a2d3e",
+              }}>
+                <div style={{ width: 24, height: 24, borderRadius: "50%", background: activeUserId === u.id ? u.color : "#1a2d3e", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 9, color: activeUserId === u.id ? "#070d14" : "#3a6a8a", letterSpacing: "0.05em" }}>{u.avatar}</div>
+                <span style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, fontWeight: 600, color: activeUserId === u.id ? u.color : "#2a5a7a" }}>{u.name.split(" ")[0]}</span>
+              </button>
+            ))}
           </div>
           <div style={{ display: "flex", gap: 18, alignItems: "center" }}>
             {STATUS_COLS.map(s => (
@@ -598,7 +619,7 @@ Output the full tailored resume text.`;
                 <Btn onClick={searchJobs} disabled={searching}>{searching ? "Searching…" : "Search"}</Btn>
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 14 }}>
-                {JOB_ROLES.map(r => (
+                {user.roles.map(r => (
                   <button key={r} onClick={() => setQuery(r)} style={{
                     fontFamily: "'Barlow', sans-serif", fontSize: 11, fontWeight: 500, padding: "4px 12px", borderRadius: 20, cursor: "pointer",
                     background: query === r ? "rgba(74,158,255,0.15)" : "rgba(13,25,34,0.8)",
@@ -608,11 +629,11 @@ Output the full tailored resume text.`;
               </div>
               <div style={{ background: "#0a1520", border: "1px solid #0e2a3a", borderRadius: 5, padding: "9px 14px", marginBottom: 16, display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
                 <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#1a6a9a", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>Profile</span>
-                <span style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "#3a7ab8" }}>{CANDIDATE.current}</span>
+                <span style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "#3a7ab8" }}>{user.current}</span>
                 <span style={{ color: "#0e2a3a" }}>·</span>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#34d399" }}>{CANDIDATE.salary}</span>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#34d399" }}>{user.salary}</span>
                 <span style={{ color: "#0e2a3a" }}>·</span>
-                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#2a5a7a" }}>📍 {LOCATIONS.find(l=>l.value===location)?.label || CANDIDATE.location}</span>
+                <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#2a5a7a" }}>📍 {LOCATIONS.find(l=>l.value===location)?.label || user.location}</span>
               </div>
               {searchErr && <div style={{ background: "rgba(248,113,113,0.06)", border: "1px solid #f8717130", borderRadius: 4, padding: "10px 14px", marginBottom: 12, fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#f87171" }}>⚠ {searchErr}</div>}
               {searching && <Spinner text="searching sydney job boards…" />}
@@ -864,15 +885,15 @@ Output the full tailored resume text.`;
                   Connection
                 </div>
                 <div style={{ marginBottom: 14 }}>
-                  <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "#3a6a8a", marginBottom: 6 }}>Ollama URL (your Pi via Cloudflare Tunnel)</div>
+                  <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: 12, color: "#3a6a8a", marginBottom: 6 }}>Pi Proxy URL (your Raspberry Pi via Cloudflare Tunnel)</div>
                   <input
                     value={ollamaUrl}
                     onChange={e => setOllamaUrl(e.target.value)}
-                    placeholder="https://ollama.anuprijal.com.np"
+                    placeholder="https://proxy.anuprijal.com.np"
                     style={{ width: "100%", background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 4, color: "#c8d8e8", fontFamily: "'DM Mono', monospace", fontSize: 12, padding: "9px 12px" }}
                   />
                   <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, color: "#1a4a6a", marginTop: 5 }}>
-                    Or use http://localhost:11434 if running locally
+                    This proxy handles both job search (SEEK + Adzuna) and AI tools (Ollama)
                   </div>
                 </div>
                 <div style={{ marginBottom: 16 }}>
@@ -915,7 +936,7 @@ Output the full tailored resume text.`;
                   Current Config
                 </div>
                 <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: "#3a6a8a", lineHeight: 2 }}>
-                  <div>URL &nbsp;&nbsp;→ <span style={{ color: "#4a9eff" }}>{localStorage.getItem("ollama_url") || "not set"}</span></div>
+                  <div>URL &nbsp;&nbsp;→ <span style={{ color: "#4a9eff" }}>{localStorage.getItem("proxy_url") || "not set"}</span></div>
                   <div>Model → <span style={{ color: "#34d399" }}>{localStorage.getItem("ollama_model") || "llama3.2 (default)"}</span></div>
                 </div>
               </Card>
