@@ -21,20 +21,64 @@ const USERS = {
       "Junior Systems Administrator M365 Sydney",
       "IT Operations Analyst Healthcare Sydney",
     ],
-    resume: `Anup Rijal | Burwood NSW 2134 | 0416 203 633 | rejalanop55@gmail.com
+    resume: `Anup Rijal
+Burwood, NSW 2134 | 0416 203 633 | rejalanop55@gmail.com
+LinkedIn: https://www.linkedin.com/in/anup-rijal-bb579a131 | Portfolio: https://anuprijal.com
 
-SUMMARY: IT Service Desk Analyst Level 2 with experience supporting enterprise environments across healthcare, telecommunications, and technology sectors. Skilled in advanced troubleshooting, Microsoft 365 administration, Active Directory, Intune device management, SCCM deployments, and endpoint support across Windows, macOS, and mobile platforms.
+PROFESSIONAL SUMMARY
+IT Service Desk Analyst Level 2 with experience supporting enterprise environments across healthcare, telecommunications, and technology sectors. Skilled in advanced troubleshooting, Microsoft 365 administration, Active Directory, Intune device management, SCCM deployments, and endpoint support across Windows, macOS, and mobile platforms. Known for resolving complex escalations, improving IT processes, and delivering high-quality end-user support in fast-paced enterprise environments.
 
-TECHNICAL SKILLS: Windows 10/11, Windows Server 2016/2019, macOS, iOS, Microsoft 365, Exchange Admin Center, Azure AD, Teams, SharePoint, Microsoft Intune, SCCM, PDQ Deploy, Active Directory, Group Policy, User Provisioning, VMware, Hyper-V, Citrix, TCP/IP, DNS, DHCP, VLANs, VPN, RDC, TeamViewer, AnyDesk, Quick Assist, ServiceNow, Zendesk, FreshService.
+TECHNICAL SKILLS
+Operating Systems: Windows 10/11, Windows Server 2016/2019, macOS, iOS
+Microsoft Technologies: Microsoft 365, Exchange Admin Center, Azure AD, Teams, SharePoint
+Endpoint Management: Microsoft Intune, SCCM, PDQ Deploy
+Identity & Access: Active Directory, Group Policy, User Provisioning
+Virtualization: VMware, Hyper-V, Citrix
+Networking: TCP/IP, DNS, DHCP, VLANs, VPN, Routing & Switching
+Remote Support: RDC, TeamViewer, AnyDesk, Quick Assist
+Ticketing Systems: ServiceNow, Zendesk, FreshService
+Hardware: Laptops, desktops, MacBooks, Printers, mobile devices, Timeclock
 
-EXPERIENCE:
-- Service Desk Analyst L2 | Opal Healthcare | Dec 2025–Present: Level 2 support and escalation management for enterprise healthcare users. Active Directory, Group Policy, Microsoft 365 (Exchange, Teams, SharePoint). Intune and SCCM device management. DNS, DHCP, VPN troubleshooting. Device deployment, imaging, lifecycle management.
-- Service Desk Analyst L1 | Opal Healthcare | Dec 2024–Dec 2025: Frontline IT support, incident logging, Windows/macOS/mobile troubleshooting, imaging, account provisioning, printers, VPN, M365.
-- Technical Specialist | Apple | May 2024–Dec 2024: Advanced Apple device troubleshooting, escalation management.
-- IT Support Officer (Intern) | Rebb Tech Pty Ltd | Dec 2021–May 2022: Remote and onsite support, SCCM deployments, inventory management.
+PROFESSIONAL EXPERIENCE
 
-EDUCATION: Bachelor of Information Technology & Systems — Victorian Institute of Technology Sydney (2018–2020).
-CERTIFICATIONS: Systems Analyst — ACS. Network & Systems Engineer — ACS.`,
+Service Desk Analyst – Level 2 | Opal Healthcare | Dec 2025 – Present
+• Provide Level 2 technical support and escalation management for enterprise users across healthcare facilities.
+• Troubleshoot complex Windows, macOS, and mobile device issues escalated from Level 1 support.
+• Administer Active Directory accounts, group policies, and security permissions; Microsoft 365 services including Exchange, Teams, SharePoint, and user provisioning.
+• Project cutover for new site acquisition as ICT end user lead for multiple sites.
+• Support device management using Microsoft Intune and SCCM including policy deployment and compliance monitoring.
+• Investigate and resolve networking issues including DNS, DHCP, VPN, and connectivity problems.
+• Manage IP phones and DECT phones across Opal facilities.
+• Perform device deployment, imaging, and lifecycle management for laptops, desktops, and mobile devices.
+• Participate in incident management and root cause analysis for recurring technical issues.
+• Maintain and improve internal IT knowledge base documentation.
+
+Service Desk Analyst – Level 1 | Opal Healthcare | Dec 2024 – Dec 2025
+• Provided frontline IT support across enterprise healthcare environments.
+• Logged and managed incidents and service requests using ITSM platforms.
+• Supported Windows, macOS, and mobile devices including troubleshooting hardware and software issues.
+• Assisted with device imaging, account provisioning, and application installations.
+• Resolved issues related to printers, VPN access, and Microsoft 365 applications.
+• Escalated complex incidents to Level 2 and infrastructure teams.
+
+Technical Specialist | Apple | May 2024 – Dec 2024
+• Delivered advanced Apple device troubleshooting and technical solutions for customers.
+• Escalated complex technical issues and ensured high-quality customer support.
+• Maintained strong customer satisfaction through effective problem resolution.
+
+IT Support Officer (Intern) | Rebb Tech Pty Ltd | Dec 2021 – May 2022
+• Delivered remote and onsite support for PCs, printers, and network systems.
+• Assisted with hardware and software configuration and enterprise device rollouts.
+• Supported SCCM deployments and maintained equipment inventory.
+
+EDUCATION
+Bachelor of Information Technology & Systems — Victorian Institute of Technology Sydney | Mar 2018 – Dec 2020
+Certificate IV in Information Technology — TAFE NSW Meadowbank | Jul 2017 – Jan 2018
+Certificate III in Information, Digital Media & Technology — TAFE NSW Meadowbank | Jan 2017 – Jul 2018
+
+CERTIFICATIONS
+• Systems Analyst — Australian Computer Society
+• Network & Systems Engineer — Australian Computer Society`,
   },
 
   apil: {
@@ -56,34 +100,75 @@ CERTIFICATIONS: Systems Analyst — ACS. Network & Systems Engineer — ACS.`,
       "Analytics Engineer SQL Python Sydney",
       "Data Scientist Healthcare Sydney",
     ],
-    resume: `Apil Rijal | Burwood NSW | +61 411 237 563 | rijalapil43@gmail.com
+    resume: `APIL RIJAL
+Burwood, NSW | +61 411 237 563 | rijalapil43@gmail.com
+LinkedIn: https://linkedin.com/in/aaronrijal | GitHub: https://github.com/rijalapil
 
-SUMMARY: Data Analyst with experience in data research, predictive analytics, and data-driven process improvement across NSW Government and private sector. Skilled in analysing large datasets, developing dashboards, automating workflows, and translating complex data into actionable insights.
+OBJECTIVE
+Data Analyst with years of experience in data research, predictive analytics, and data-driven process improvement across NSW Government and private sector organisations. Skilled in analysing large datasets, developing dashboards, automating workflows, and translating complex data into clear, actionable insights that support operational and strategic decision-making.
 
-TECHNICAL SKILLS: Python, SQL, Power BI, Tableau, Excel (Pivot Tables, LOOKUP, Charts), MySQL, PostgreSQL, MSSQL, MongoDB, BigQuery, Snowflake, AWS, Azure, GCP, ETL pipelines, predictive modelling, machine learning, API integration.
+TECHNICAL SKILLS
+- Data Analysis & Reporting: KPI monitoring, trend analysis, performance reporting, predictive analytics
+- Programming: Python, SQL
+- Data Visualisation: Power BI, Tableau, Excel (Pivot Tables, LOOKUP, Charts)
+- Databases: MySQL, PostgreSQL, MSSQL, MongoDB, BigQuery, Snowflake
+- Data Management: Data cleaning, transformation, ETL processes, API integration
+- Cloud: AWS, Azure, GCP
 
-EXPERIENCE:
-- Data Research Analyst | Dealer Studio (Remote) | Oct 2024–Feb 2026: Conducted data research for automotive sales performance and inventory optimisation. Built predictive models for vehicle demand and pricing using Python and ML. Designed executive dashboards monitoring KPIs and revenue. Optimised ETL pipelines.
-- Data Analyst | NSW Health, Chatswood | Jul 2022–Oct 2024: Analysed large health datasets for trends and correlations. Developed predictive models for disease forecasting and resource allocation. Built dashboards for internal stakeholders and leadership. Collaborated with cross-functional teams on vaccination coverage and health outcomes.
-- Aviation Safety Analyst | Certis Security, Sydney | Jan 2021–Jul 2022: Analysed aviation safety data and incident reports. Maintained safety dashboards. Built predictive models for risk anticipation and resource allocation.
+PROFESSIONAL EXPERIENCE
 
-EDUCATION: Bachelor of Computing Information Systems — Victoria University Melbourne (2019). Advanced Diploma in Data Analysis — Asia Pacific International College Sydney (2016).
-CERTIFICATIONS: Google Advanced Data Analytics Specialization. Microsoft Power BI Data Analyst Associate.`,
+Data Research Analyst | Dealer Studio, Gold Coast QLD (Remote) | Oct 2024 - Feb 2026
+- Conducted in-depth data research and analysis to support automotive sales performance and inventory optimisation
+- Designed interactive dashboards and executive reports to monitor KPIs, stock turnover, and revenue performance
+- Built predictive models to forecast vehicle demand, pricing trends, and market behaviour using Python and ML
+- Extracted, cleaned, and transformed large datasets, optimising ETL pipelines for data accuracy and integrity
+- Performed EDA to identify trends, anomalies, and business opportunities
+
+Data Analyst | NSW Health, Chatswood NSW | Jul 2022 - Oct 2024
+- Conducted thorough data analysis to identify trends, patterns, and correlations in large datasets
+- Designed and maintained dashboards and reporting tools for internal and external stakeholders
+- Developed predictive models for disease forecasting, resource allocation, and operational planning
+- Implemented process improvements, workflow automation, and standardisation to enhance operational efficiency
+- Collaborated with cross-functional teams on vaccination coverage and health outcomes analytics
+
+Aviation Safety Analyst | Certis Security, Sydney NSW | Jan 2021 - Jul 2022
+- Analysed aviation safety data, incident reports, and operational logs to identify trends and risks
+- Maintained dashboards to monitor safety performance, compliance, and incident response metrics
+- Developed predictive models to anticipate safety risks and resource allocation needs
+
+VOLUNTEERING
+Australian Border Force - Sydney Airport Screening Project - Dec 2020
+
+EDUCATION
+Bachelor of Computing Information Systems - Victoria University, Melbourne VIC (2019)
+Advanced Diploma in Data Analysis - Asia Pacific International College, Sydney NSW (2016)
+
+CERTIFICATIONS
+- Google Advanced Data Analytics Specialization
+- Microsoft Power BI Data Analyst Associate`,
   },
 };
 
 const LOCATIONS = [
-  { label: "Sydney CBD",            value: "Sydney CBD, NSW" },
-  { label: "North Sydney",          value: "North Sydney, NSW" },
-  { label: "Parramatta",            value: "Parramatta, NSW" },
-  { label: "Macquarie Park",        value: "Macquarie Park, NSW" },
-  { label: "Chatswood",             value: "Chatswood, NSW" },
-  { label: "Burwood / Strathfield", value: "Burwood, NSW" },
-  { label: "Norwest / Hills",       value: "Norwest Business Park, NSW" },
-  { label: "Olympic Park",          value: "Sydney Olympic Park, NSW" },
-  { label: "Mascot / Airport",      value: "Mascot, NSW" },
-  { label: "Remote / WFH",          value: "Remote, Australia" },
-  { label: "Anywhere in NSW",       value: "New South Wales, Australia" },
+  { group: "Sydney",     label: "Sydney CBD",            value: "Sydney CBD, NSW" },
+  { group: "Sydney",     label: "North Sydney",          value: "North Sydney, NSW" },
+  { group: "Sydney",     label: "Parramatta",            value: "Parramatta, NSW" },
+  { group: "Sydney",     label: "Macquarie Park",        value: "Macquarie Park, NSW" },
+  { group: "Sydney",     label: "Chatswood",             value: "Chatswood, NSW" },
+  { group: "Sydney",     label: "Burwood / Strathfield", value: "Burwood, NSW" },
+  { group: "Sydney",     label: "Norwest / Hills",       value: "Norwest Business Park, NSW" },
+  { group: "Sydney",     label: "Olympic Park",          value: "Sydney Olympic Park, NSW" },
+  { group: "Sydney",     label: "Mascot / Airport",      value: "Mascot, NSW" },
+  { group: "Sydney",     label: "Anywhere in NSW",       value: "New South Wales, Australia" },
+  { group: "Melbourne",  label: "Melbourne CBD",         value: "Melbourne CBD, VIC" },
+  { group: "Melbourne",  label: "St Kilda Rd / Southbank", value: "Southbank, VIC" },
+  { group: "Melbourne",  label: "Docklands",             value: "Docklands, VIC" },
+  { group: "Melbourne",  label: "Richmond / Cremorne",   value: "Richmond, VIC" },
+  { group: "Melbourne",  label: "Clayton / Monash",      value: "Clayton, VIC" },
+  { group: "Melbourne",  label: "Dandenong",             value: "Dandenong, VIC" },
+  { group: "Melbourne",  label: "Anywhere in VIC",       value: "Victoria, Australia" },
+  { group: "Remote",     label: "Remote / WFH",          value: "Remote, Australia" },
+  { group: "Remote",     label: "Anywhere in Australia", value: "Australia" },
 ];
 
 const STATUS_COLS = [
@@ -344,7 +429,22 @@ function ScoreRing({ score }) {
 // ─── Main App ─────────────────────────────────────────────────────────────────
 export default function JobHunter() {
   const [activeUserId, setActiveUserId] = useState(() => localStorage.getItem("jh-active-user") || "anup");
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem("jh-dark-mode") !== "false");
   const user = USERS[activeUserId] || USERS.anup;
+
+  const T = darkMode ? {
+    bg: "#070d14", bg2: "#07111a", bg3: "#0d1922", border: "#1a2d3e",
+    text: "#c8d8e8", textDim: "#3a6a8a", textMid: "#5a8ab8", accent: "#4a9eff",
+  } : {
+    bg: "#f0f4f8", bg2: "#ffffff", bg3: "#e8eef5", border: "#c8d8e8",
+    text: "#1a2d3e", textDim: "#5a7a9a", textMid: "#2a5a8a", accent: "#1a5fa8",
+  };
+
+  const toggleDark = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    localStorage.setItem("jh-dark-mode", String(next));
+  };
 
   const [tab, setTab]             = useState("search");
   const [jobs, setJobs]           = useState([]);
@@ -487,9 +587,14 @@ export default function JobHunter() {
     if (!rtJob) return;
     setAiLoading(true); setAiError(null); setRtResult(null);
     try {
-      const resumeSnap2 = user.resume.slice(0, 700);
-      const sys = `Resume writer. Rewrite summary and top bullets to match the job. Keep facts accurate. Plain text output.`;
-      const text = await callAI(sys, `JOB: ${rtJob.title} at ${rtJob.company}. KEYWORDS: ${(rtJob.description||"").slice(0,200)}. RESUME: ${resumeSnap2}`);
+      const sys = `You are a professional resume writer. Produce a COMPLETE, ready-to-use resume for the candidate below, tailored for the target job.
+RULES: Output the FULL resume — all sections, all roles, all bullet points. Do NOT summarise or truncate.
+Rewrite the summary/objective section to target the specific role.
+Reorder and reword bullet points to highlight most relevant experience first.
+Naturally inject keywords from the job description into existing bullet points.
+Keep ALL facts, dates, companies, and qualifications exactly as provided — do not invent anything.
+Format with clear section headers. Use bullet points. Ready to copy-paste.`;
+      const text = await callAI(sys, `TARGET JOB: ${rtJob.title} at ${rtJob.company}\nJOB KEYWORDS: ${(rtJob.description||"").slice(0,300)}\n\nFULL RESUME TO TAILOR:\n${user.resume}`);
       setRtResult(text);
     } catch (e) { setAiError(e.message); }
     setAiLoading(false);
@@ -541,17 +646,22 @@ export default function JobHunter() {
         @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
       `}</style>
 
-      <div style={{ background: "#070d14", minHeight: "100vh", fontFamily: "'Barlow', sans-serif", color: "#c8d8e8" }}>
+      <div style={{ background: T.bg, minHeight: "100vh", fontFamily: "'Barlow', sans-serif", color: T.text, transition: "background 0.2s" }}>
 
         {/* Header */}
-        <div style={{ background: "#07111a", borderBottom: "1px solid #0e2035", padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ background: T.bg2, borderBottom: "1px solid " + T.border, padding: "14px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: user.color, boxShadow: `0 0 10px ${user.color}88` }} />
             <span style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 800, fontSize: 18, color: "#e8f4ff", letterSpacing: "0.1em", textTransform: "uppercase" }}>Job Hunter</span>
             <span style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#1a5a8a", letterSpacing: "0.12em" }}>// {LOCATIONS.find(l=>l.value===location)?.label || "SYD"}</span>
           </div>
-          {/* User Switcher */}
+          {/* Dark/Light + User Switcher */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <button onClick={toggleDark} style={{
+              background: "transparent", border: "1px solid #1a2d3e", borderRadius: 20,
+              padding: "5px 12px", cursor: "pointer", fontFamily: "'DM Mono', monospace",
+              fontSize: 12, color: "#4a7a9a", transition: "all 0.15s",
+            }}>{darkMode ? "☀ Light" : "🌙 Dark"}</button>
             {Object.values(USERS).map(u => (
               <button key={u.id} onClick={() => switchUser(u.id)} style={{
                 display: "flex", alignItems: "center", gap: 7, padding: "6px 12px",
@@ -575,7 +685,7 @@ export default function JobHunter() {
         </div>
 
         {/* Tabs */}
-        <div style={{ background: "#07111a", borderBottom: "1px solid #0e2035", padding: "0 24px", display: "flex", gap: 0, overflowX: "auto" }}>
+        <div style={{ background: T.bg2, borderBottom: "1px solid " + T.border, padding: "0 24px", display: "flex", gap: 0, overflowX: "auto" }}>
           {TABS.map(t => (
             <button key={t.id} onClick={() => setTab(t.id)} style={{
               fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12,
@@ -601,7 +711,13 @@ export default function JobHunter() {
                   color: "#7ec8ff", fontFamily: "'Barlow', sans-serif", fontSize: 12,
                   padding: "10px 12px", cursor: "pointer", minWidth: 160,
                 }}>
-                  {LOCATIONS.map(l => <option key={l.value} value={l.value}>{l.label}</option>)}
+                  {["Sydney","Melbourne","Remote"].map(group => (
+                    <optgroup key={group} label={group}>
+                      {LOCATIONS.filter(l => l.group === group).map(l => (
+                        <option key={l.value} value={l.value}>{l.label}</option>
+                      ))}
+                    </optgroup>
+                  ))}
                 </select>
                 <Btn onClick={searchJobs} disabled={searching}>{searching ? "Searching…" : "Search"}</Btn>
               </div>
