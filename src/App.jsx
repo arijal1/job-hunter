@@ -462,6 +462,9 @@ export default function JobHunter() {
   const [searchErr, setSearchErr] = useState(null);
   const [lastQ, setLastQ]         = useState(null);
   const [typeFilter, setTypeFilter]   = useState('All');
+  const [importUrl, setImportUrl]       = useState("");
+  const [importing, setImporting]       = useState(false);
+  const [importErr, setImportErr]       = useState(null);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters]         = useState({
     salaryMin: "", salaryMax: "", contractType: "", contractTime: "",
@@ -524,6 +527,30 @@ export default function JobHunter() {
     localStorage.setItem("ollama_model", ollamaModel.trim() || "llama3.2");
     setOllamaUrl(url);
     setShowSettings(false);
+  };
+
+  // ── Import job from URL ──
+  const importJob = async () => {
+    if (!importUrl.trim()) return;
+    setImporting(true); setImportErr(null);
+    try {
+      const proxyUrl = localStorage.getItem("proxy_url") || "https://proxy.anuprijal.com.np";
+      const res = await fetch(proxyUrl + "/api/import-job", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: importUrl.trim() }),
+      });
+      const job = await res.json();
+      if (job.error) throw new Error(job.error);
+      // Add to jobs list and auto-save to pipeline
+      setJobs(prev => [job, ...prev.filter(j => j.id !== job.id)]);
+      handleSave(job);
+      setImportUrl("");
+      setTab("search");
+    } catch(e) {
+      setImportErr(e.message);
+    }
+    setImporting(false);
   };
 
   // ── Search — real jobs from SEEK + Adzuna ──
@@ -747,7 +774,25 @@ STRICT RULES:
                   }}>{r.replace(" Sydney","")}</button>
                 ))}
               </div>
-              {/* Filter Panel */}
+              {/* URL Job Importer */}
+              <div style={{ background: "#0a1520", border: "1px solid #1a3a5a", borderRadius: 5, padding: "10px 14px", marginBottom: 12 }}>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 10, color: "#2a6a9a", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 7 }}>📎 Import Job from URL</div>
+                <div style={{ display: "flex", gap: 8 }}>
+                  <input value={importUrl} onChange={e => setImportUrl(e.target.value)} onKeyDown={e => e.key === "Enter" && importJob()}
+                    placeholder="Paste any job listing URL — SEEK, LinkedIn, Indeed, company site..."
+                    style={{ flex: 1, background: "#08111a", border: "1px solid #1a3a5a", borderRadius: 4, color: "#c8d8e8", fontFamily: "'DM Mono', monospace", fontSize: 11, padding: "8px 12px" }}
+                  />
+                  <button onClick={importJob} disabled={importing || !importUrl.trim()} style={{
+                    fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700, fontSize: 12, letterSpacing: "0.07em", textTransform: "uppercase",
+                    padding: "8px 16px", borderRadius: 3, cursor: importing ? "not-allowed" : "pointer",
+                    background: "linear-gradient(135deg,#0d6a4a,#064a32)", color: "#34d399", border: "1px solid #34d39930", opacity: importing ? 0.6 : 1,
+                  }}>{importing ? "Importing…" : "Import"}</button>
+                </div>
+                {importErr && <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 10, color: "#f87171", marginTop: 6 }}>⚠ {importErr}</div>}
+                {!importErr && <div style={{ fontFamily: "'Barlow', sans-serif", fontSize: 11, color: "#1a4a6a", marginTop: 5 }}>Works with SEEK, LinkedIn, Indeed, Jora, company career pages</div>}
+              </div>
+
+        {/* Filter Panel */}
               <div style={{ marginBottom: 10 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                   <button onClick={() => setShowFilters(!showFilters)} style={{
